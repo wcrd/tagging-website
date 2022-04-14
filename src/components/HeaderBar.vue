@@ -7,10 +7,13 @@
       </div>
     </div>
     <div id="header-right" class="flex flex-row space-x-2">
-      <div><router-link to="/">Points</router-link></div>
-      <div><router-link to="/test">Equipment</router-link></div>
-      <div>Docs &amp; Guides</div>
-      <div>About</div>
+      <router-link
+        v-for="item in routes"
+        :key="item.to"
+        :to="item.to"
+      >
+        {{ item.title }}
+      </router-link>
     </div>
   </div>
 </nav>
@@ -18,6 +21,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      routes: [
+        {title:"Points", to:"/points"},
+        {title:"Equipment", to:"/equipment"},
+        {title:"Guides", to:"/guides"},
+        {title:"About", to:"/about"},
+      ]
+    }
+  }
 }
 </script>
 

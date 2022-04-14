@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex items-center justify-center">
       <h1>
-          I am a test page
+          I am a test page: Guides
       </h1>
   </div>
 </template>
