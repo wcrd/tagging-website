@@ -1,7 +1,7 @@
 <template>
     <!-- Lets put custom combos and grid filters here with the grid -->
     <div id="grid-controls" class="flex flex-row">
-        <div id="search-bar" class="flex flex-col border border-stone-400 rounded-md items-start px-3 py-1 my-2 place-content-evenly" style="width: 600px; background-color: rgba(192, 222, 236, 30%);">
+        <div id="search-bar" class="flex flex-col border border-stone-400 rounded-md items-start px-3 py-1 mb-2 place-content-evenly" style="width: 600px; background-color: rgba(192, 222, 236, 30%);">
             <label for="global-filter-value" class="font-medium">Search all fields in current view:</label>
             <input id="global-filter-value" v-model="globalSearchTerm" class="p-1 my-1 w-full border border-stone-400" type="search" placeholder="type in here to filter on all columns...">
         </div>
@@ -13,7 +13,7 @@
 <script setup>
 import {TabulatorFull as Tabulator} from 'tabulator-tables'
 import {ref, onMounted, watch} from 'vue'
-import {copyIcon} from '../utils/tabulator_grid_functions'
+import {copyIcon, filterFunctions} from '../utils/tabulator_grid_functions'
 import pointsData from '../data/points/latest/web_data.json' // static data, does not need to be part of the model
 
 const globalSearchTerm = ref("")
@@ -21,63 +21,21 @@ const tableRef = ref(null)
 
 function setGlobalFilter(searchParams) {
     if(!searchParams){
-        removeSearchRowFilter()
+        filterFunctions.removeSearchRowFilter()
     } else {
-        removeSearchRowFilter()
-        table.addFilter(arraySearchRowFilter, {searchTerm: searchParams})
+        filterFunctions.removeSearchRowFilter()
+        table.addFilter(filterFunctions.arraySearchRowFilter, {searchTerm: searchParams})
     }
 }
-// Global Search filter
-const arraySearchRowFilter = (data, filterParams) => {
-    // columns to search
-    const cols = ['pointName', 'description', 'proto', 'bacnet', 'base_brick_class']
-    // process headerValue
-    let searchTerms = filterParams.searchTerm.trim().toLowerCase().split(/[\s,]+/)
-    // search each rows columns
-    for (let col of cols) {
-        if(searchTerms.every( term => data[col].toLowerCase().includes(term))){
-            return true
-        }
-    }
-    return false
-}
-const removeSearchRowFilter = () => {
-    // get current filters
-    let global_filters = table.getFilters().filter(filter => { return filter.field.name == "arraySearchRowFilter"})
-    global_filters.map(filter => table.removeFilter(filter.field, filter.type))
-}
+
 
 watch(globalSearchTerm, setGlobalFilter)
 
 onMounted(() => {
-    //define some sample data
-    const tabledata = [
-        {id:1, pointName:"Oli Bob", age:"12", col:"red", dob:""},
-        {id:2, pointName:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
-        {id:3, pointName:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
-        {id:4, pointName:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
-        {id:5, pointName:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
-        {id:1, pointName:"Oli Bob", age:"12", col:"red", dob:""},
-        {id:2, pointName:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
-        {id:3, pointName:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
-        {id:4, pointName:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
-        {id:5, pointName:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
-        {id:1, pointName:"Oli Bob", age:"12", col:"red", dob:""},
-        {id:2, pointName:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
-        {id:3, pointName:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
-        {id:4, pointName:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
-        {id:5, pointName:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
-        {id:1, pointName:"Oli Bob", age:"12", col:"red", dob:""},
-        {id:2, pointName:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
-        {id:3, pointName:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
-        {id:4, pointName:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
-        {id:5, pointName:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
-    ];
-
 
     //create Tabulator on DOM element with id "example-table"
     const table = new Tabulator("#points-table", {
-        height: '96vh', // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+        height: '89vh', // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
         data: pointsData, //assign data to table
         layout: "fitColumns", //fit columns to width of table (optional)
         groupBy: ["Main Group","Sub Group","Variation"],

@@ -32,6 +32,34 @@ export const copyIcon = (cell, formatterParams) => "<i class='copy-icon'></i>"
 //     return data
 // }
 
+//
+//  FILTERS
+//
+
+// Global Search filter
+const arraySearchRowFilter = (data, filterParams) => {
+    // columns to search
+    const cols = ['pointName', 'description', 'proto', 'bacnet', 'base_brick_class']
+    // process headerValue
+    let searchTerms = filterParams.searchTerm.trim().toLowerCase().split(/[\s,]+/)
+    // search each rows columns
+    for (let col of cols) {
+        if(searchTerms.every( term => data[col].toLowerCase().includes(term))){
+            return true
+        }
+    }
+    return false
+}
+const removeSearchRowFilter = () => {
+    // get current filters
+    let global_filters = table.getFilters().filter(filter => { return filter.field.name == "arraySearchRowFilter"})
+    global_filters.map(filter => table.removeFilter(filter.field, filter.type))
+}
+
+export const filterFunctions = {
+    arraySearchRowFilter,
+    removeSearchRowFilter
+}
 
 // 
 //  TESTING
