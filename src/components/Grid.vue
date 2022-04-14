@@ -1,5 +1,5 @@
 <template>
-<div class="px-5 pt-5 h-full">
+<div class="px-5 py-5 h-full">
   <div id="example-table"></div>
 </div>
 </template>
@@ -42,5 +42,5 @@ onMounted(() => {
 </script>
 
 <style>
-    @import "tabulator-tables"
+    @import "tabulator-tables";
 </style>
