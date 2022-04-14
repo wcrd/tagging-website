@@ -24,7 +24,7 @@ function setGlobalFilter(searchParams) {
         filterFunctions.removeSearchRowFilter()
     } else {
         filterFunctions.removeSearchRowFilter()
-        table.addFilter(filterFunctions.arraySearchRowFilter, {searchTerm: searchParams})
+        table.addFilter(filterFunctions.arraySearchRowFilter, {searchTerm: searchParams, name:"globalFilter"})
     }
 }
 

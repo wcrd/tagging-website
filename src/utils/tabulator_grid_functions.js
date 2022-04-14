@@ -52,7 +52,7 @@ const arraySearchRowFilter = (data, filterParams) => {
 }
 const removeSearchRowFilter = () => {
     // get current filters
-    let global_filters = table.getFilters().filter(filter => { return filter.field.name == "arraySearchRowFilter"})
+    let global_filters = table.getFilters().filter(filter => { return filter.type.name == "globalFilter"})
     global_filters.map(filter => table.removeFilter(filter.field, filter.type))
 }
 
