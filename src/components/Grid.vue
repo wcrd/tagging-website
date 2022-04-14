@@ -1,12 +1,13 @@
 <template>
-<div class="px-5 py-5 h-full">
+    <!-- Lets put custom combos and grid filters here with the grid -->
   <div id="example-table"></div>
-</div>
+
 </template>
 
 <script setup>
 import {TabulatorFull as Tabulator} from 'tabulator-tables'
 import {ref, onMounted} from 'vue'
+import {testFunction} from '../utils/tabulator_grid_functions'
 
 
 onMounted(() => {
@@ -38,6 +39,8 @@ onMounted(() => {
         alert("Row " + row.getData().id + " Clicked!!!!");
     });
 });
+
+testFunction()
 
 </script>
 
