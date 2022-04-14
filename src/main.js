@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import VueTabulator from 'vue-tabulator'
+import './assets/main.css'
 
-createApp(App).use(VueTabulator).mount('#app')
+createApp(App).mount('#app')

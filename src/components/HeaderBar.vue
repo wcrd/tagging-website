@@ -1,5 +1,9 @@
 <template>
-  <h1>Hello</h1>
+  <div class="header">
+    <div id="header-title">
+      Point Tagging Guide
+    </div>
+  </div>
 </template>
 
 <script>
