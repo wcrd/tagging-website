@@ -1,14 +1,53 @@
 <template>
     <!-- Lets put custom combos and grid filters here with the grid -->
-    <div id="points-table" class=""></div>
+    <div id="grid-controls" class="flex flex-row">
+        <div id="search-bar" class="flex flex-col border border-stone-400 rounded-md items-start px-3 py-1 my-2 place-content-evenly" style="width: 600px; background-color: rgba(192, 222, 236, 30%);">
+            <label for="global-filter-value" class="font-medium">Search all fields in current view:</label>
+            <input id="global-filter-value" v-model="globalSearchTerm" class="p-1 my-1 w-full border border-stone-400" type="search" placeholder="type in here to filter on all columns...">
+        </div>
+    </div>
+    
+    <div id="points-table"></div>
 </template>
 
 <script setup>
 import {TabulatorFull as Tabulator} from 'tabulator-tables'
-import {ref, onMounted} from 'vue'
+import {ref, onMounted, watch} from 'vue'
 import {copyIcon} from '../utils/tabulator_grid_functions'
 import pointsData from '../data/points/latest/web_data.json' // static data, does not need to be part of the model
 
+const globalSearchTerm = ref("")
+const tableRef = ref(null)
+
+function setGlobalFilter(searchParams) {
+    if(!searchParams){
+        removeSearchRowFilter()
+    } else {
+        removeSearchRowFilter()
+        table.addFilter(arraySearchRowFilter, {searchTerm: searchParams})
+    }
+}
+// Global Search filter
+const arraySearchRowFilter = (data, filterParams) => {
+    // columns to search
+    const cols = ['pointName', 'description', 'proto', 'bacnet', 'base_brick_class']
+    // process headerValue
+    let searchTerms = filterParams.searchTerm.trim().toLowerCase().split(/[\s,]+/)
+    // search each rows columns
+    for (let col of cols) {
+        if(searchTerms.every( term => data[col].toLowerCase().includes(term))){
+            return true
+        }
+    }
+    return false
+}
+const removeSearchRowFilter = () => {
+    // get current filters
+    let global_filters = table.getFilters().filter(filter => { return filter.field.name == "arraySearchRowFilter"})
+    global_filters.map(filter => table.removeFilter(filter.field, filter.type))
+}
+
+watch(globalSearchTerm, setGlobalFilter)
 
 onMounted(() => {
     //define some sample data
@@ -91,7 +130,6 @@ onMounted(() => {
         // }
     });
 
-    // table.blockRedraw()
 
     window.table = table
 
@@ -99,6 +137,8 @@ onMounted(() => {
     table.on("rowClick", function(e, row){ 
         alert("Row " + row.getData().id + " Clicked!!!!");
     });
+
+    // tableRef.value = table
 });
 
 
