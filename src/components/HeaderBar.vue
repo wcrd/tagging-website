@@ -1,21 +1,36 @@
 <template>
+<nav>
   <div class="bg-indigo-500 h-10 px-5 flex justify-between items-center text-white">
     <div id="header-left">
       <div id="header-title">
-        Point Tagging Guide
+        Building Tagging Guide
       </div>
     </div>
     <div id="header-right" class="flex flex-row space-x-2">
-      <div><router-link to="/">Points Guide</router-link></div>
-      <div><router-link to="/test">Equipment Types</router-link></div>
-      <div>Equipment Diagrams</div>
-      <div>Modelling Documentation</div>
+      <router-link
+        v-for="item in routes"
+        :key="item.to"
+        :to="item.to"
+      >
+        {{ item.title }}
+      </router-link>
     </div>
   </div>
+</nav>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      routes: [
+        {title:"Points", to:"/points"},
+        {title:"Equipment", to:"/equipment"},
+        {title:"Guides", to:"/guides"},
+        {title:"About", to:"/about"},
+      ]
+    }
+  }
 }
 </script>
 

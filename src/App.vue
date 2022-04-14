@@ -4,7 +4,7 @@ import HeaderBar from './components/HeaderBar.vue'
 </script>
 
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="h-screen flex flex-col box-border">
     <HeaderBar/>
     <router-view></router-view>
   </div>
@@ -12,7 +12,7 @@ import HeaderBar from './components/HeaderBar.vue'
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font: 16px -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

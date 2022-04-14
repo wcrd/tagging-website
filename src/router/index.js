@@ -1,18 +1,35 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Points from '../pages/Points.vue'
-import Test from '../pages/Test.vue'
+import Equipment from '../pages/Equipment.vue'
+import Guides from '../pages/Guides.vue'
+import About from '../pages/About.vue'
 
 const routes = [
     {
         path: '/',
+        name: 'Home',
+        redirect: '/points'
+    },
+    {
+        path: '/points',
         name: 'Points',
         component: Points
     },
     {
-        path: '/test',
-        name: 'Test',
-        component: Test
+        path: '/equipment',
+        name: 'Equipment',
+        component: Equipment
+    },
+    {   
+        path: '/guides',
+        name: 'Guides',
+        component: Guides
+    },
+    {
+        path: '/about',
+        name: 'About',
+        component: About
     }
 ]
 
