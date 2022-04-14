@@ -7,7 +7,7 @@ import Grid from './components/Grid.vue'
 </script>
 
 <template>
-  <div class="container">
+  <div class="h-screen flex flex-col">
     <HeaderBar/>
     <Grid/>
   </div>
@@ -20,7 +20,6 @@ import Grid from './components/Grid.vue'
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 0px;
 }
 
 .container {
