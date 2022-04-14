@@ -1,6 +1,6 @@
 <template>
     <!-- Lets put custom combos and grid filters here with the grid -->
-    <div id="points-table"></div>
+    <div id="points-table" class=""></div>
 </template>
 
 <script setup>
@@ -38,7 +38,7 @@ onMounted(() => {
 
     //create Tabulator on DOM element with id "example-table"
     const table = new Tabulator("#points-table", {
-        height: '100%', // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+        height: '96vh', // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
         data: pointsData, //assign data to table
         layout: "fitColumns", //fit columns to width of table (optional)
         groupBy: ["Main Group","Sub Group","Variation"],
@@ -109,8 +109,8 @@ onMounted(() => {
     
     /* Tabulator Overrides */
     #points-table {
-        position: absolute;
-        /* height: calc(60px); */
+        /* position: absolute;
+        height: calc(60px); */
     }
 
     /* CUSTOM ICONS */

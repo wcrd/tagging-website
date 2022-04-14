@@ -4,7 +4,7 @@ import HeaderBar from './components/HeaderBar.vue'
 </script>
 
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="h-screen flex flex-col box-border">
     <HeaderBar/>
     <router-view></router-view>
   </div>

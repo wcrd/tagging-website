@@ -1,4 +1,5 @@
 <template>
+<nav>
   <div class="bg-indigo-500 h-10 px-5 flex justify-between items-center text-white">
     <div id="header-left">
       <div id="header-title">
@@ -12,6 +13,7 @@
       <div>About</div>
     </div>
   </div>
+</nav>
 </template>
 
 <script>
