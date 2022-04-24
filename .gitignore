@@ -25,3 +25,6 @@ dist-ssr
 
 # Dev notes
 notes.md
+
+.firebase
+.git
