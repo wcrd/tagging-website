@@ -44,10 +44,10 @@ onMounted(() => {
             return value ? value : "General"
         },
         columns: [
-            {title:"#", field:"id", width:20, headerFilter:false},
-            {title:"Point Name", field:"pointName", formatter:"textarea", width:400, headerFilter:"input", headerFilterFunc:"keywords", headerFilterFuncParams:{matchAll: true}, headerFilterPlaceholder:"filter column..."},
+            {title:"#", field:"id", width:20, headerFilter:false, cssClass:"dulled-text"},
+            {title:"Point Name", field:"pointName", formatter:"textarea", width:400, headerFilter:"input", headerFilterFunc:"keywords", headerFilterFuncParams:{matchAll: true}, headerFilterPlaceholder:"filter column...", cssClass:"no-right-border"},
             {formatter:copyIcon, width:40, hozAlign:"center"}, // copy icon that looks like it in the point name field
-            {width:25, hozAlign:"center", field:"state", formatter:"traffic",  
+            {width:25, hozAlign:"center", field:"state", formatter:"traffic",  cssClass:"cursor-help", resizable:false,
                 headerFilter: "select", 
                 headerFilterParams: { 
                     values: { 
@@ -104,12 +104,6 @@ onMounted(() => {
 
 <style>
     @import "tabulator-tables";
-    
-    /* Tabulator Overrides */
-    #points-table {
-        /* position: absolute;
-        height: calc(60px); */
-    }
 
     /* CUSTOM ICONS */
     .copy-icon {
@@ -127,5 +121,44 @@ onMounted(() => {
     }
     .copy-icon:hover {
         filter: invert(0)
+    }
+
+    /* SPECIAL TABULATOR OVERRIDE CLASSES */
+    /* TODO: Use the SASS variables instead. Figure out how to get them in here. */
+    /* TODO: Choose a nice color palette */
+    .tabulator-row-even {
+        background-color: #f5f3f3 !important;
+    }
+
+    .tabulator-row:hover {
+        background-color: rgb(197, 212, 231) !important;
+    }
+
+    .tabulator-group-level-0 {
+        background-color: #272838 !important;
+        color: white;
+        font-size: large;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        border: none !important;
+    }
+    .tabulator-group-level-1 {
+        background-color: #489FC7 !important;
+        color: white;
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        border: none !important;
+    }
+    .tabulator-group-level-2 {
+        border: none !important;
+        background-color: #c0deec !important;
+    }
+    /* ADDITIONAL CLASSES FOR TABULATOR */
+    .tabulator .no-right-border {
+        border-right: none;
+    }
+
+    .tabulator .dulled-text {
+        color: lightgray;
     }
 </style>
