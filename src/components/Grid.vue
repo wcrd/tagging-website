@@ -46,7 +46,7 @@ onMounted(() => {
         columns: [
             {title:"#", field:"id", width:20, headerFilter:false, cssClass:"dulled-text"},
             {title:"Point Name", field:"pointName", formatter:"textarea", width:400, headerFilter:"input", headerFilterFunc:"keywords", headerFilterFuncParams:{matchAll: true}, headerFilterPlaceholder:"filter column...", cssClass:"no-right-border"},
-            {formatter:copyIcon, width:40, hozAlign:"center"}, // copy icon that looks like it in the point name field
+            {formatter:copyIcon, width:40, hozAlign:"center", headerSort:false}, // copy icon that looks like it in the point name field
             {width:25, hozAlign:"center", field:"state", formatter:"traffic",  cssClass:"cursor-help", resizable:false,
                 headerFilter: "select", 
                 headerFilterParams: { 
@@ -92,9 +92,9 @@ onMounted(() => {
     window.table = table
 
     //trigger an alert message when the row is clicked
-    table.on("rowClick", function(e, row){ 
-        alert("Row " + row.getData().id + " Clicked!!!!");
-    });
+    // table.on("rowClick", function(e, row){ 
+    //     alert("Row " + row.getData().id + " Clicked!!!!");
+    // });
 
     // tableRef.value = table
 });
@@ -126,6 +126,30 @@ onMounted(() => {
     /* SPECIAL TABULATOR OVERRIDE CLASSES */
     /* TODO: Use the SASS variables instead. Figure out how to get them in here. */
     /* TODO: Choose a nice color palette */
+    .tabulator {
+        border-radius: 8px;
+    }
+    .tabulator-header-filter input {
+        border-radius: 5px;
+    }
+
+    .tabulator-col[role="columnheader"] {
+        background: #092841 !important;
+        color: white;
+    }
+    .tabulator-header {
+        background: #092841 !important;
+        border-bottom: 0px !important;
+    }
+
+    /* Group toggle arrow color */
+    .tabulator-row.tabulator-group.tabulator-group-visible .tabulator-arrow {
+        border-top-color:white;
+    }
+    .tabulator-row.tabulator-group .tabulator-arrow {
+        border-left-color: white;
+    }
+
     .tabulator-row-even {
         background-color: #f5f3f3 !important;
     }
@@ -135,7 +159,8 @@ onMounted(() => {
     }
 
     .tabulator-group-level-0 {
-        background-color: #272838 !important;
+        /* background-color: #272838 !important; */
+        background-color: #1A374D !important;
         color: white;
         font-size: large;
         padding-top: 10px !important;
@@ -143,7 +168,8 @@ onMounted(() => {
         border: none !important;
     }
     .tabulator-group-level-1 {
-        background-color: #489FC7 !important;
+        /* background-color: #489FC7 !important; */
+        background-color: #406882 !important;
         color: white;
         padding-top: 6px !important;
         padding-bottom: 6px !important;
@@ -151,11 +177,19 @@ onMounted(() => {
     }
     .tabulator-group-level-2 {
         border: none !important;
-        background-color: #c0deec !important;
+        /* background-color: #c0deec !important; */
+        background-color: #6998AB !important;
+        color: white;
+
     }
+
     /* ADDITIONAL CLASSES FOR TABULATOR */
-    .tabulator .no-right-border {
+    /* .tabulator .no-right-border {
         border-right: none;
+    } */
+
+    .no-right-border {
+        border-right: none !important;
     }
 
     .tabulator .dulled-text {
