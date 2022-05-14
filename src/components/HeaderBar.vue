@@ -1,6 +1,6 @@
 <template>
 <nav>
-  <div class="bg-indigo-500 h-10 px-5 flex justify-between items-center text-white">
+  <div class="h-10 px-5 flex justify-between items-center text-white">
     <div id="header-left">
       <div id="header-title">
         Building Tagging Guide
@@ -35,5 +35,7 @@ export default {
 </script>
 
 <style>
-
+  nav {
+    background-color: #354858;
+  }
 </style>

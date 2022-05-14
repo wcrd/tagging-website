@@ -131,23 +131,28 @@ onMounted(() => {
     }
     .tabulator-header-filter input {
         border-radius: 5px;
+        color: black;
+    }
+    .tabulator-cell {
+        line-height: 1.5rem;
     }
 
     .tabulator-col[role="columnheader"] {
-        background: #092841 !important;
+        background: #354858 !important;
         color: white;
     }
     .tabulator-header {
-        background: #092841 !important;
-        border-bottom: 0px !important;
+        background: #354858 !important;
+        padding-bottom: 2px;
+        border-bottom: none !important;
     }
 
     /* Group toggle arrow color */
     .tabulator-row.tabulator-group.tabulator-group-visible .tabulator-arrow {
-        border-top-color:white;
+        border-top-color:#092841;
     }
     .tabulator-row.tabulator-group .tabulator-arrow {
-        border-left-color: white;
+        border-left-color: #092841;
     }
 
     .tabulator-row-even {
@@ -159,28 +164,58 @@ onMounted(() => {
     }
 
     .tabulator-group-level-0 {
-        /* background-color: #272838 !important; */
-        background-color: #1A374D !important;
-        color: white;
+        background-color: #1a374d56 !important;
+        color: #1A374D;
         font-size: large;
         padding-top: 10px !important;
         padding-bottom: 10px !important;
-        border: none !important;
+        border-top: 2px solid #1A374D !important;
+        border-bottom: 2px solid #1A374D !important;
+    }
+     /* when same type are collapsed */
+    .tabulator-group-level-0 + .tabulator-group-level-0 {
+        border-top: none !important;
+    }
+    .tabulator-group-level-1 + .tabulator-group-level-0 {
+        border-top: none !important;
+    }
+    .tabulator-group-level-2 + .tabulator-group-level-0 {
+        border-top: none !important;
+    }
+    /* Very first one no border-top */
+    .tabulator-group-level-0:nth-child(1) {
+        border-top: none !important;
     }
     .tabulator-group-level-1 {
-        /* background-color: #489FC7 !important; */
-        background-color: #406882 !important;
-        color: white;
+        background-color: #40688223 !important;
+        color: #1A374D;
         padding-top: 6px !important;
         padding-bottom: 6px !important;
-        border: none !important;
+        border-top: 2px solid #406882 !important;
+        border-bottom: 2px solid #406882 !important;
     }
-    .tabulator-group-level-2 {
-        border: none !important;
-        /* background-color: #c0deec !important; */
-        background-color: #6998AB !important;
-        color: white;
+    /* when stacked next to each other remove top border */
+    .tabulator-group-level-0 + .tabulator-group-level-1 {
+        border-top: none !important;
+    }
+    /* when same type are collapsed */
+    .tabulator-group-level-1 + .tabulator-group-level-1 {
+        border-top: none !important;
+    }
 
+    .tabulator-group-level-2 {
+        background-color: #6998ab21 !important;
+        color: #1A374D;
+        border-top: 2px solid #6998AB !important;
+        border-bottom: 2px solid #6998AB !important;
+    }
+    /* when stacked next to each other remove top border */
+    .tabulator-group-level-1 + .tabulator-group-level-2 {
+        border-top: none !important;
+    }
+     /* when same type are collapsed */
+    .tabulator-group-level-2 + .tabulator-group-level-2 {
+        border-top: none !important;
     }
 
     /* ADDITIONAL CLASSES FOR TABULATOR */
