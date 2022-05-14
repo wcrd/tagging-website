@@ -44,10 +44,10 @@ onMounted(() => {
             return value ? value : "General"
         },
         columns: [
-            {title:"#", field:"id", width:20, headerFilter:false},
-            {title:"Point Name", field:"pointName", formatter:"textarea", width:400, headerFilter:"input", headerFilterFunc:"keywords", headerFilterFuncParams:{matchAll: true}, headerFilterPlaceholder:"filter column..."},
-            {formatter:copyIcon, width:40, hozAlign:"center"}, // copy icon that looks like it in the point name field
-            {width:25, hozAlign:"center", field:"state", formatter:"traffic",  
+            {title:"#", field:"id", width:20, headerFilter:false, cssClass:"dulled-text"},
+            {title:"Point Name", field:"pointName", formatter:"textarea", width:400, headerFilter:"input", headerFilterFunc:"keywords", headerFilterFuncParams:{matchAll: true}, headerFilterPlaceholder:"filter column...", cssClass:"no-right-border"},
+            {formatter:copyIcon, width:40, hozAlign:"center", headerSort:false}, // copy icon that looks like it in the point name field
+            {width:25, hozAlign:"center", field:"state", formatter:"traffic",  cssClass:"cursor-help", resizable:false,
                 headerFilter: "select", 
                 headerFilterParams: { 
                     values: { 
@@ -92,9 +92,9 @@ onMounted(() => {
     window.table = table
 
     //trigger an alert message when the row is clicked
-    table.on("rowClick", function(e, row){ 
-        alert("Row " + row.getData().id + " Clicked!!!!");
-    });
+    // table.on("rowClick", function(e, row){ 
+    //     alert("Row " + row.getData().id + " Clicked!!!!");
+    // });
 
     // tableRef.value = table
 });
@@ -104,12 +104,6 @@ onMounted(() => {
 
 <style>
     @import "tabulator-tables";
-    
-    /* Tabulator Overrides */
-    #points-table {
-        /* position: absolute;
-        height: calc(60px); */
-    }
 
     /* CUSTOM ICONS */
     .copy-icon {
@@ -127,5 +121,113 @@ onMounted(() => {
     }
     .copy-icon:hover {
         filter: invert(0)
+    }
+
+    /* SPECIAL TABULATOR OVERRIDE CLASSES */
+    /* TODO: Use the SASS variables instead. Figure out how to get them in here. */
+    /* TODO: Choose a nice color palette */
+    .tabulator {
+        border-radius: 8px;
+    }
+    .tabulator-header-filter input {
+        border-radius: 5px;
+        color: black;
+    }
+    .tabulator-cell {
+        line-height: 1.5rem;
+    }
+
+    .tabulator-col[role="columnheader"] {
+        background: #354858 !important;
+        color: white;
+    }
+    .tabulator-header {
+        background: #354858 !important;
+        padding-bottom: 2px;
+        border-bottom: none !important;
+    }
+
+    /* Group toggle arrow color */
+    .tabulator-row.tabulator-group.tabulator-group-visible .tabulator-arrow {
+        border-top-color:#092841;
+    }
+    .tabulator-row.tabulator-group .tabulator-arrow {
+        border-left-color: #092841;
+    }
+
+    .tabulator-row-even {
+        background-color: #f5f3f3 !important;
+    }
+
+    .tabulator-row:hover {
+        background-color: rgb(197, 212, 231) !important;
+    }
+
+    .tabulator-group-level-0 {
+        background-color: #1a374d56 !important;
+        color: #1A374D;
+        font-size: large;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        border-top: 2px solid #1A374D !important;
+        border-bottom: 2px solid #1A374D !important;
+    }
+     /* when same type are collapsed */
+    .tabulator-group-level-0 + .tabulator-group-level-0 {
+        border-top: none !important;
+    }
+    .tabulator-group-level-1 + .tabulator-group-level-0 {
+        border-top: none !important;
+    }
+    .tabulator-group-level-2 + .tabulator-group-level-0 {
+        border-top: none !important;
+    }
+    /* Very first one no border-top */
+    .tabulator-group-level-0:nth-child(1) {
+        border-top: none !important;
+    }
+    .tabulator-group-level-1 {
+        background-color: #40688223 !important;
+        color: #1A374D;
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        border-top: 2px solid #406882 !important;
+        border-bottom: 2px solid #406882 !important;
+    }
+    /* when stacked next to each other remove top border */
+    .tabulator-group-level-0 + .tabulator-group-level-1 {
+        border-top: none !important;
+    }
+    /* when same type are collapsed */
+    .tabulator-group-level-1 + .tabulator-group-level-1 {
+        border-top: none !important;
+    }
+
+    .tabulator-group-level-2 {
+        background-color: #6998ab21 !important;
+        color: #1A374D;
+        border-top: 2px solid #6998AB !important;
+        border-bottom: 2px solid #6998AB !important;
+    }
+    /* when stacked next to each other remove top border */
+    .tabulator-group-level-1 + .tabulator-group-level-2 {
+        border-top: none !important;
+    }
+     /* when same type are collapsed */
+    .tabulator-group-level-2 + .tabulator-group-level-2 {
+        border-top: none !important;
+    }
+
+    /* ADDITIONAL CLASSES FOR TABULATOR */
+    /* .tabulator .no-right-border {
+        border-right: none;
+    } */
+
+    .no-right-border {
+        border-right: none !important;
+    }
+
+    .tabulator .dulled-text {
+        color: lightgray;
     }
 </style>
